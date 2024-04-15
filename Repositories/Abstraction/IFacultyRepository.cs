@@ -7,5 +7,7 @@ namespace WebEnterprise.Repositories.Abstraction
     {
         Task<bool> IsExisted(string name);
         Task<List<StatisticsFaculty>> GetStatisticsFaculties();
+        Task<List<FacultyDetail>> GetFacultyDetail();
+        Task<List<FacultyPieChart>> GetFacultyPie(string semesterName);
     }
 }

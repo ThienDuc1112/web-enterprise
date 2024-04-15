@@ -3,8 +3,6 @@
     ViewData["Title"] = "Index";
     Layout = "../../Views/Shared/_Layout.cshtml";
     var index = 1;
-    var index2 = 1;
-    var index3 = 1;
 }
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -21,7 +19,6 @@
         var Semester = [];
 
 
-
     @if (ViewBag.BarChart.Count > 0)
     {
         foreach (var item in ViewBag.BarChart)
@@ -31,11 +28,15 @@
             @:Designing.push(@item.Designing);
             @:Engineering.push(@item.Engineering);
             @:Semester.push("@item.Name");
-
         }
     }
+            console.log(Computing); // Log Computing data to console
+        console.log(Business); // Log Business data to console
+        console.log(Designing); // Log Designing data to console
+        console.log(Engineering); // Log Engineering data to console
+        console.log(Semester);
 
-                    var ComputingDataset = {
+        var ComputingDataset = {
             label: 'Computing',
             data: Computing,
             backgroundColor: 'rgb(255, 99, 132)',
@@ -161,7 +162,7 @@
         }
     }
 
-            createDoughnutChart("doughnutChart1", semester1, data1);
+        createDoughnutChart("doughnutChart1", semester1, data1);
         createDoughnutChart("doughnutChart2", semester2, data2);
         createDoughnutChart("doughnutChart3", semester3, data3);
     });
@@ -183,7 +184,7 @@
                 <h4 class="display-4">Percentage Of Contribution Details By Pie Chart</h4>
                 <div class="d-flex justify-content-center gap-3 mt-4">
                     <div class="card card-width">
-                        <h4>Fall 2023</h4>
+                        <h4 id="semester1">@ViewBag.SemesterNames[0]</h4>
                         <div class="card-header">
                             <div class="chart">
                                 <canvas id="doughnutChart1"></canvas>
@@ -191,7 +192,7 @@
                         </div>
                     </div>
                     <div class="card card-width">
-                        <h4>Winter 2023</h4>
+                        <h4 id="semester2">@ViewBag.SemesterNames[1]</h4>
                         <div class="card-header">
                             <div class="chart">
                                 <canvas id="doughnutChart2"></canvas>
@@ -199,7 +200,7 @@
                         </div>
                     </div>
                     <div class="card card-width">
-                        <h4>Spring 2024</h4>
+                        <h4 id="semester3">@ViewBag.SemesterNames[2]</h4>
                         <div class="card-header">
                             <div class="chart">
                                 <canvas id="doughnutChart3"></canvas>
@@ -210,7 +211,7 @@
             </div>
 
             <div class="mt-5 padding-width">
-                <h4 class="display-5">Table of Contributons</h4>
+                <h4 class="display-5">Faculty statistics table by semester</h4>
                 <div class="con-table">
                     <div class="con-header">
                         <div class="grid-template">
@@ -238,62 +239,7 @@
                 </div>
             </div>
 
-            <div class="mt-5 padding-width">
-                <h4 class="display-5">Contributions Without Comments</h4>
-                <div class="con-table">
-                    <div class="con-header">
-                        <div class="grid-template">
-                            <div class="col-span-1">STT</div>
-                            <div class="col-span-2">Title</div>
-                            <div class="col-span-2">Megazine Name</div>
-                            <div class="col-span-2">Faculty</div>
-                            <div class="col-span-2">Created Date</div>
-                        </div>
-                    </div>
-                    @foreach (var item in ViewBag.ExCon)
-                    {
-                        <div class="con-body @((index2 % 2 == 0) ? "even-row" : "odd-row")">
-                            <div class="grid-template">
-                                <div class="col-span-1">@index2</div>
-                                <div class="col-span-2">@item.Title</div>
-                                <div class="col-span-2">@item.MegazineName</div>
-                                <div class="col-span-2">@item.FacultyName</div>
-                                <div class="col-span-2">@item.CreatedDate</div>
-
-                            </div>
-                        </div>
-                        index2++;
-                    }
-                </div>
-            </div>
-            <div class="mt-5 padding-width">
-                <h4 class="display-5">Contributions Without Comments After 14 Days</h4>
-                <div class="con-table">
-                    <div class="con-header">
-                        <div class="grid-template">
-                            <div class="col-span-1">STT</div>
-                            <div class="col-span-2">Title</div>
-                            <div class="col-span-2">Megazine Name</div>
-                            <div class="col-span-2">Faculty</div>
-                            <div class="col-span-2">Created Date</div>
-                        </div>
-                    </div>
-                    @foreach (var item in ViewBag.ExCon14)
-                    {
-                        <div class="con-body @((index3 % 2 == 0) ? "even-row" : "odd-row")">
-                            <div class="grid-template">
-                                <div class="col-span-1">@index3</div>
-                                <div class="col-span-2">@item.Title</div>
-                                <div class="col-span-2">@item.MegazineName</div>
-                                <div class="col-span-2">@item.FacultyName</div>
-                                <div class="col-span-2">@item.CreatedDate</div>
-
-                            </div>
-                        </div>
-                        index3++;
-                    }
-                </div>
-            </div>
+           
         </div>
     </div>
 </div>

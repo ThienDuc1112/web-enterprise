@@ -6,5 +6,7 @@ namespace WebEnterprise.Repositories.Abstraction
     {
         Task<bool> IsExisted(string name);
 
+        Task<List<string>> GetThreeNewestSemester();
+
     }
 }

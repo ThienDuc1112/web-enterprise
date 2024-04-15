@@ -349,6 +349,9 @@ namespace WebEnterprise.Migrations
                     b.Property<string>("ImagePath")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
@@ -590,13 +593,13 @@ namespace WebEnterprise.Migrations
             modelBuilder.Entity("WebEnterprise.Models.Entities.Megazine", b =>
                 {
                     b.HasOne("WebEnterprise.Models.Entities.Faculty", "Faculty")
-                        .WithMany()
+                        .WithMany("Megazines")
                         .HasForeignKey("FacultyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("WebEnterprise.Models.Entities.Semester", "Semester")
-                        .WithMany()
+                        .WithMany("Megazines")
                         .HasForeignKey("SemesterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -624,9 +627,19 @@ namespace WebEnterprise.Migrations
                     b.Navigation("Images");
                 });
 
+            modelBuilder.Entity("WebEnterprise.Models.Entities.Faculty", b =>
+                {
+                    b.Navigation("Megazines");
+                });
+
             modelBuilder.Entity("WebEnterprise.Models.Entities.Megazine", b =>
                 {
                     b.Navigation("Contributions");
+                });
+
+            modelBuilder.Entity("WebEnterprise.Models.Entities.Semester", b =>
+                {
+                    b.Navigation("Megazines");
                 });
 
             modelBuilder.Entity("WebEnterprise.Models.Entities.User", b =>

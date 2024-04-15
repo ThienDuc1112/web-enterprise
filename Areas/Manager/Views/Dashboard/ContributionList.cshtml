@@ -49,7 +49,7 @@
             var semesterNameColumn = $('<div>').addClass('col-span-2').text(item.fullName);
             var facultyNameColumn = $('<div>').addClass('col-span-2').text(item.megazine);
             var contributionCountColumn = $('<div>').addClass('col-span-2').text(convertToDate(item.createdDate));
-            var contributorCountColumn = $('<a>').addClass('col-span-1 btn btn-primary me-2').text("View Detail");
+            var contributorCountColumn = $('<a>').addClass('col-span-1 btn btn-primary max-hg me-2').text("View Detail");
             contributorCountColumn.attr('href', `/contribution/detail/${item.id}`);
 
             gridTemplate.append(indexColumn, semesterNameColumn, facultyNameColumn, contributionCountColumn, contributorCountColumn);
@@ -60,12 +60,12 @@
 
     $(document).ready(function () {
         loadData();
-        console.log(files)
         
 
         $('#facultyDropdown').change(function () {
             var selectedSemester = $(this).val();
             loadData(selectedSemester);
+            console.log(selectedSemester);
         });
     });
 
@@ -112,7 +112,7 @@
                         <div class="col-span-3 ms-2">Name File</div>
                         <div class="col-span-2">Author</div>
                         <div class="col-span-2">Megazine</div>
-                        <div class="col-span-2">Author</div>
+                        <div class="col-span-2">Created Date</div>
                         <div class="col-span-1">View Detail</div>
                     </div>
                 </div>

@@ -179,3 +179,8 @@
 .even-row {
     background: #f1f5f9;
 }
+
+.remove-dot {
+    list-style-type: none;
+    font-size: 42px;
+}

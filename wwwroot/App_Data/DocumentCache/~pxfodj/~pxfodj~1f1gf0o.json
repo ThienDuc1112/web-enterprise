@@ -1,0 +1,55 @@
+{
+  "CacheSourceKey": "pxfodj",
+  "CachePdfKey": "pxfodj/pxfodj-11btgoz.pdf",
+  "CacheXpzKey": "pxfodj/pxfodj-1f1gf0o.xpz",
+  "CacheInfoKey": "pxfodj/pxfodj-1f1gf0o.json",
+  "CacheCopyKey": null,
+  "Document": "Type=Url;File=\"https://firebasestorage.googleapis.com/v0/b/webenterprise-8a158.appspot.com/o/assets%2Fd750a18c-7104-467d-b84a-da5e147dfad2.docx?alt=media&token=84bfbf80-397c-4e3d-a1b9-c4b7fe0171bd\"",
+  "DocumentFileName": "d750a18c-7104-467d-b84a-da5e147dfad2.docx",
+  "DownloadFileName": null,
+  "InputOptions": {
+    "$type": "GleamTech.DocumentUltimate.WordProcessingInputOptions, GleamTech.DocumentUltimate",
+    "FieldFileName": "d750a18c-7104-467d-b84a-da5e147dfad2.docx",
+    "UpdateFields": true,
+    "Encoding": null,
+    "Format": "Docx",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [
+      {
+        "$type": "GleamTech.DocumentUltimate.TextWatermark, GleamTech.DocumentUltimate",
+        "Text": "DocumentUltimate",
+        "TextAlignment": "Left",
+        "Font": "Arial, 12pt, Bold",
+        "FontColor": "#FF0000",
+        "UseFontSize": false,
+        "HorizontalAlignment": "Center",
+        "VerticalAlignment": "Center",
+        "HorizontalDistance": 0.0,
+        "VerticalDistance": 0.0,
+        "DistanceIsPercentage": false,
+        "Width": 50.0,
+        "Height": 50.0,
+        "SizeIsPercentage": true,
+        "Rotation": 0.0,
+        "Opacity": 50.0,
+        "InBackground": false,
+        "AnnotationMode": false,
+        "PrintVisible": true,
+        "ScreenVisible": true,
+        "PageRange": "all"
+      }
+    ],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Attachments": [],
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "pxfodj",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  },
+  "Attachments": []
+}

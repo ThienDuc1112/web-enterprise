@@ -13,6 +13,15 @@ namespace WebEnterprise.Repositories.Implement
             _dbContext = businessDbContext;
         }
 
+        public async Task<List<string>> GetThreeNewestSemester()
+        {
+            return await _dbContext.Semesters
+                .OrderBy(s => s.Id)
+                .Take(3)
+                .Select(s => s.Name)
+                .ToListAsync();
+        }
+
         public async Task<bool> IsExisted(string name)
         {
             return await _dbContext.Faculties.AllAsync(x => x.Name == name);

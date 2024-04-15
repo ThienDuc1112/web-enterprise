@@ -11,6 +11,6 @@ namespace WebEnterprise.Repositories.Abstraction
         Task<List<GetContributionModel>> SearchContribution(int megazineId, string? query);
         Task<List<StatisticContribution>> GetContributionsWithout();
         Task<List<StatisticContribution>> GetContributionsWithout14();
-        Task<List<GetContributionModel>> SearchContribution(string semester);
+        Task<List<GetContributionModel>> SearchContribution2(string semester);
     }
 }

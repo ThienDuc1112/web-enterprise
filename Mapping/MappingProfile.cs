@@ -6,6 +6,7 @@ using WebEnterprise.ViewModels.Faculty;
 using WebEnterprise.ViewModels.Imgae;
 using WebEnterprise.ViewModels.Megazine;
 using WebEnterprise.ViewModels.Semester;
+using WebEnterprise.ViewModels.User;
 
 namespace WebEnterprise.Mapping
 {
@@ -17,10 +18,20 @@ namespace WebEnterprise.Mapping
             CreateMap<Faculty, GetFacultyModel>()
                 .ForMember(dest => dest.FacultyId, act => act.MapFrom(src => src.Id))
                 .ReverseMap();
+            CreateMap<Faculty, EditFacultyModel>().ReverseMap();
 
             CreateMap<Megazine, GetMegazineModel>()
                 .ForMember(dest => dest.FacultyName, act => act.MapFrom(src => src.Faculty.Name))
                 .ReverseMap();
+            CreateMap<Semester, GetSemesterAdmin>()
+                .ForMember(dest => dest.SemesterId, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
+                .ReverseMap();
+            CreateMap<CreateMegazineModel, Megazine>()
+                .ReverseMap();
+            CreateMap<EditMegazineModel, Megazine>()
+                .ReverseMap();
+
             CreateMap<Contribution, CreateContribution>().ReverseMap();
             CreateMap<Contribution, DetailContribution>()
                 .ForMember(dest => dest.FullName, act => act.MapFrom(src => src.User.FullName))
@@ -28,6 +39,7 @@ namespace WebEnterprise.Mapping
                 .ForMember(dest => dest.numberContribution, act => act.MapFrom(src => src.User.Contributions.Count()))
                 .ReverseMap();
             CreateMap<Contribution, UpdateContribution>().ReverseMap();
+            CreateMap<Contribution, EditContribution>().ReverseMap();
 
             CreateMap<Image, CreateImage>().ReverseMap();
 
@@ -35,6 +47,8 @@ namespace WebEnterprise.Mapping
 
             CreateMap<Semester, CreateSemester>().ReverseMap();
             CreateMap<Semester, UpdateSemester>().ReverseMap();
+
+            CreateMap<User, EditProfileModel>().ReverseMap();
         }
 
 

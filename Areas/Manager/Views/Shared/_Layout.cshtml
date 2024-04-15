@@ -1,4 +1,4 @@
-﻿@using System.Text.Json
+﻿﻿@using System.Text.Json
 @using WebEnterprise.Models.Entities
 ﻿@using Microsoft.AspNetCore.Identity
 @using Microsoft.AspNetCore.Http
@@ -18,8 +18,10 @@
     <title>@ViewData["Title"] - MVCApp</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/managerSite.css" asp-append-version="true" />
+    <link rel="stylesheet" href="//cdn.datatables.net/2.0.3/css/dataTables.dataTables.min.css" />
 </head>
 <body>
     <style>
@@ -36,7 +38,7 @@
             <div class="header">
                 <div class="sidebar_menu">
                     <div class="menu-group">
-                        
+
                         <h3 class="header">Manager Dashboard</h3>
                         <ul id="menuItems" class="menu-items" style="padding-left: 0px">
                             <li class="dashboard-item">
@@ -44,8 +46,16 @@
                                 <a class="" href="https://localhost:38181/Manager/Dashboard">Dashboard</a>
                             </li>
                             <li class="dashboard-item">
+                                <i class="fa fa-newspaper-o text-white"></i>
+                                <a class="" href="https://localhost:38181/Manager/Magazine">Magazine</a>
+                            </li>
+                            <li class="dashboard-item">
                                 <i class="fa-solid fa-list text-white"></i>
-                                <a class="" href="#">Contribution List</a>
+                                <a class="" href="https://localhost:38181/Manager/Dashboard/ContributionList">Contribution List</a>
+                            </li>
+                            <li class="dashboard-item">
+                                <i class="fa-solid fa-file-excel"></i>
+                                <a class="" href="https://localhost:38181/Manager/Dashboard/ViewExceptionReport">Exception Reports</a>
                             </li>
 
                         </ul>
@@ -53,7 +63,7 @@
                         <ul class="" style="padding-left: 0px">
                             <li class="dashboard-item">
                                 <i class="fa-solid fa-right-from-bracket text-white"></i>
-                                <a class="" href="#">Logout</a>
+                                <a class="hover-item" asp-area="" asp-action="Logout" asp-controller="Authentication">Logout</a>
                             </li>
                         </ul>
                     </div>
@@ -61,7 +71,7 @@
             </div>
         </div>
         <div class="position-relative d-flex flex-grow-1 flex-col overflow-auto full-width">
-            <header>
+            <header class="bg-white">
                 <div class="container bg-header bg-white">
                     <nav class="" style="padding: 10px 10px">
                         <div class="d-flex align-items-center justify-content-between header-card">
@@ -79,7 +89,7 @@
                 </div>
             </header>
 
-            <div class=" dashboard-color">
+            <div class=" dashboard-color bg-white">
                 @RenderBody()
             </div>
         </div>
@@ -90,7 +100,6 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function () {
             var currentUrl = window.location.href;
@@ -104,6 +113,8 @@
             });
         });
     </script>
+
+    <script src="//cdn.datatables.net/2.0.0/js/dataTables.min.js"></script>
 
     @await Component.InvokeAsync("Notyf")
     @RenderSection("Scripts", required: false)

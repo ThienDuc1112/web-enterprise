@@ -116,7 +116,7 @@ namespace WebEnterprise.Repositories.Implement
                 conQuery = conQuery.Where(c => c.Title.Contains(query));
             }
 
-            var contributions = await conQuery.Where(con => con.MegazineId == megazineId)
+            var contributions = await conQuery.Where(con => con.MegazineId == megazineId && con.Status == "Accept")
                 .Select(c => new GetContributionModel
                 {
                     Id = c.Id,
@@ -133,15 +133,15 @@ namespace WebEnterprise.Repositories.Implement
             return contributions;
         }
 
-        public async Task<List<GetContributionModel>> SearchContribution(string semester)
+        public async Task<List<GetContributionModel>> SearchContribution2(string semester)
         {
             IQueryable<Contribution> conQuery = _dbContext.Contributions;
-            if (!string.IsNullOrEmpty(semester) && semester != "All")
+            if (!string.IsNullOrEmpty(semester))
             {
                 conQuery = conQuery.Where(c => c.Megazine.Semester.Name == semester);
             }
 
-            var contributions = await conQuery
+            var contributions = await conQuery.Where(con => con.Status == "Accept")
                 .Select(c => new GetContributionModel
                 {
                     Id = c.Id,

@@ -9,17 +9,17 @@ using WebEnterprise.ViewModels.Faculty;
 namespace WebEnterprise.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class FacultyController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        //private readonly IMapper _mapper;
+        private readonly IMapper _mapper;
         public INotyfService _notyfService { get; }
 
-        public FacultyController(IUnitOfWork unitOfWork, INotyfService notyfService)
+        public FacultyController(IUnitOfWork unitOfWork, INotyfService notyfService, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
-            //_mapper = mapper;
+            _mapper = mapper;
             _notyfService = notyfService;
         }
 
@@ -38,13 +38,14 @@ namespace WebEnterprise.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Faculty faculty)
+        public async Task<IActionResult> Create(CreateFacultyModel faculty)
         {
 
             if (ModelState.IsValid)
             {
                 _notyfService.Success("You successfully create a new Faculty");
-                await _unitOfWork.FacultyRepository.Add(faculty);
+                var facultyVM = _mapper.Map<Faculty>(faculty);
+                await _unitOfWork.FacultyRepository.Add(facultyVM);
                 return RedirectToAction("Index");
             }
             else
@@ -66,19 +67,26 @@ namespace WebEnterprise.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            return View(facultyFromDb);
+            EditFacultyModel facultyVM = _mapper.Map<EditFacultyModel>(facultyFromDb);
+            return View(facultyVM);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Faculty faculty)
+        public async Task<IActionResult> Edit([Bind("Id,Name,Description")] EditFacultyModel facultyVM)
         {
             if (ModelState.IsValid)
             {
-                _notyfService.Success("You successfully update a Faculty");
+                var faculty = await _unitOfWork.FacultyRepository.GetById(facultyVM.Id);
+                if(faculty == null)
+                {
+                    return NotFound();
+                }
+                 _mapper.Map(facultyVM, faculty);
                 await _unitOfWork.FacultyRepository.Update(faculty);
+                _notyfService.Success("You successfully update a Faculty");
                 return RedirectToAction("Index");
             }
-            return View();
+            return RedirectToAction("Index");
         }
 
         //Delete
@@ -98,7 +106,7 @@ namespace WebEnterprise.Areas.Admin.Controllers
             return View(facultyFromDb);
         }
 
-        [HttpPost, ActionName("Delete")]
+        [HttpDelete]
         public async Task<IActionResult> DeletePOST(int? id)
         {
             Faculty? obj = _unitOfWork.FacultyRepository.Get(u => u.Id == id);

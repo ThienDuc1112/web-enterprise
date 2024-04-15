@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using WebEnterprise.Infrastructure.Persistance;
-using WebEnterprise.Models.Entities;
 using WebEnterprise.Repositories.Abstraction;
 using WebEnterprise.ViewModels.Megazine;
+using X.PagedList;
 
 namespace WebEnterprise.Controllers
 {
@@ -25,11 +19,14 @@ namespace WebEnterprise.Controllers
         }
 
         // GET: Home
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string query, int? page)
         {
-            var megazines = await _unitOfWork.MegazineRepository.GetMegazinesWithRelevant();
+            ViewBag.StoredQuery = query;
+            int pageSize = 8;
+            int pageNumber = (page ?? 1);
+            var megazines = await _unitOfWork.MegazineRepository.GetMegazinesWithRelevant(query);
             var megazineModels = _mapper.Map<List<GetMegazineModel>>(megazines);
-            return View(megazineModels);
+            return View(megazineModels.ToPagedList(pageNumber, pageSize));
         }
 
     }

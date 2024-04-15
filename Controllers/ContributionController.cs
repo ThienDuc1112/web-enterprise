@@ -54,17 +54,16 @@ namespace WebEnterprise.Controllers
             {
                 AuthTokenAsyncFactory = () => Task.FromResult(a.FirebaseToken),
             });
-            var listFile = new List<string>();
+           
             try
             {
                 foreach (var con in contributions)
                 {
-                    var conReference = storage.Child("assets").Child(con.FilePath);
+                    var conReference = storage.Child("assets").Child(con.ProfilePicture);
                     var downloadConTask = conReference.GetDownloadUrlAsync();
                     var conPath = await downloadConTask;
-                    listFile.Add(conPath);
+                    con.ProfilePicture = conPath;
                 }
-                ViewBag.ContributionPaths = listFile;
             }
             catch (Exception ex)
             {
@@ -167,6 +166,7 @@ namespace WebEnterprise.Controllers
                 AuthTokenAsyncFactory = () => Task.FromResult(a.FirebaseToken),
             });
             var reference = storage.Child("assets").Child(contribution.FilePath);
+            var profileUrl = storage.Child("assets").Child(contribution.ProfilePicture);
             var listImagePath = new List<string>();
 
             try
@@ -174,10 +174,13 @@ namespace WebEnterprise.Controllers
                 // Get a download URL for the file
                 var downloadUrlTask = reference.GetDownloadUrlAsync();
                 var downloadUrl = await downloadUrlTask;
+                var downloadProfileTask = profileUrl.GetDownloadUrlAsync();
+                var downloadProfileUrl = await downloadProfileTask;
 
                 if (downloadUrl != null)
                 {
                     ViewBag.DocumentUrl = downloadUrl;
+                    contribution.ProfilePicture = downloadProfileUrl;
                 }
 
                 foreach (var image in contribution.imagePaths)

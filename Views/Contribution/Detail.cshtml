@@ -46,7 +46,7 @@
             <p class="time-title">Uploaded On @Model.EndSemesterDate</p>
             <div class="profile-area">
                 <div class="avatar">
-                    <img class="avatar" src="~/images/answer.png" alt="answer">
+                    <img class="avatar" src="@(Model.ProfilePicture != "avt.jpg" ? Url.Content(Model.ProfilePicture) : Url.Content("/images/face/avt.jpg"))" alt="answer">
                 </div>
                 <div class="info">
                     <span class="info">@Model.FullName</span>
@@ -128,12 +128,13 @@
                             </div>
                         </form>
                     </div>
-                   
+
                 </div>
             </div>
         </div>
 
-        @if(Model.Comment != null){
+        @if (Model.Comment != null)
+        {
             <div class="bg-color-page mt-4">
                 <div class="panel">
                     <div class="panel-body">

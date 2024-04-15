@@ -145,8 +145,7 @@ namespace WebEnterprise.Areas.Admin.Controllers
 
 
 
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [HttpDelete]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Semesters == null)

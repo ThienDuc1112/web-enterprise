@@ -1,4 +1,7 @@
-﻿@model IEnumerable<WebEnterprise.ViewModels.Megazine.GetMegazineModel>
+﻿﻿@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@model IPagedList<WebEnterprise.ViewModels.Megazine.GetMegazineModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -8,7 +11,7 @@
 <section class="doc_banner_area search-banner-light">
     <div class="container">
         <div class="doc_banner_content" style="max-width: 600px;">
-            <form asp-controller="Contribution" asp-action="ContributionList" class="header_search_form">
+            <form asp-controller="Home" asp-action="Index" class="header_search_form">
                 <div class="form-group" style="position: relative;">
                     <i class="fa-solid fa-magnifying-glass"></i>
                     <input type="text" name="query" class="form-control search" placeholder="Search for...">
@@ -29,18 +32,16 @@
                             <a href="#">Home</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="#">Help</a>
+                            <a href="#">Megazines</a>
                         </li>
-                        <li class="breadcrumb-item active">
-                            <a href="#">Forum</a>
-                        </li>
+                       
                     </ol>
                 </nav>
             </div>
             <div class="col-sm-5">
                 <a href="#" class="date">
                     <i class="icon_clock_alt"></i>
-                    Updated on March 03, 2020
+                    Updated on April 12, 2024
 
                 </a>
             </div>
@@ -102,6 +103,14 @@
                     </div>
                 }
 
+                <div class="container mt-3">
+                    <div class="row">
+                        <div class="col-md12">
+                            @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index","Home", new { query = ViewBag.StoredQuery,page = page }))
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <div class="col-lg-3">
                 <div class="forum_sidebar">
@@ -119,18 +128,18 @@
                         <h4 class="c_head">Category</h4>
                         <ul class="list-unstyled ticket_categories">
                             <li>
-                                <img src="~/images/answer.png" alt="category" style="width: 30px;">
-                                <a href="#">Docs WordPress Theme</a>
+                                <img src="~/images/programming.jpg" alt="category" style="width: 30px;">
+                                <a href="#">Programming Articles</a>
                                 <span class="count">10</span>
                             </li>
                             <li>
-                                <img src="~/images/answer.png" alt="category" style="width: 30px;">
-                                <a href="#">Docs WordPress Theme</a>
+                                <img src="~/images/business.png" alt="category" style="width: 30px;">
+                                <a href="#">Business Articles</a>
                                 <span class="count">10</span>
                             </li>
                             <li>
-                                <img src="~/images/answer.png" alt="category" style="width: 30px;">
-                                <a href="#">Docs WordPress Theme</a>
+                                <img src="~/images/designing.jpg" alt="category" style="width: 30px;">
+                                <a href="#">Designing Articles</a>
                                 <span class="count">10</span>
                             </li>
                         </ul>

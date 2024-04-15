@@ -13,9 +13,16 @@ namespace WebEnterprise.Repositories.Implement
             _dbContext = businessDbContext;
         }
 
-        public async Task<List<Megazine>> GetMegazinesWithRelevant()
+        public async Task<List<Megazine>> GetMegazinesWithRelevant(string query)
         {
-            var megazines = await _dbContext.Megazines.Include(f => f.Faculty).ToListAsync();
+            IQueryable<Megazine> meQuery = _dbContext.Megazines;
+
+            if (!string.IsNullOrEmpty(query))
+            {
+                meQuery = meQuery.Where(c => c.Name.Contains(query));
+            }
+
+            var megazines = await meQuery.Include(f => f.Faculty).ToListAsync();
             return megazines;
         }
     }

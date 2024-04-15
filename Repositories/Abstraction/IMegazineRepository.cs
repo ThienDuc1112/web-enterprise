@@ -4,6 +4,6 @@ namespace WebEnterprise.Repositories.Abstraction
 {
     public interface IMegazineRepository : IGenericRepository<Megazine>
     {
-        Task<List<Megazine>> GetMegazinesWithRelevant();
+        Task<List<Megazine>> GetMegazinesWithRelevant(string query);
     }
 }
